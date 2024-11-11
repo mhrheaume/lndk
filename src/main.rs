@@ -40,9 +40,7 @@ async fn main() -> Result<(), ()> {
     let data_dir = create_data_dir(&config.data_dir)
         .map_err(|e| println!("Error creating LNDK's data dir {e:?}"))?;
 
-    let log_file = config.log_dir.map(PathBuf::from).or(config
-        // The log_dir configuration is actually a file path, not a directory. So if we are
-        // falling back to data_dir, append the default log file name to get a file path.
+    let log_file = config.log_file.map(PathBuf::from).or(config
         .data_dir
         .map(|data_dir| PathBuf::from(data_dir).join(DEFAULT_LOG_FILE)));
 
